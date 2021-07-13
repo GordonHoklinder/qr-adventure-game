@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
+import 'package:qr_adventure_game/controllers/itinerary.dart';
 import 'package:qr_adventure_game/models/parsed_function.dart';
 
 import 'parser_funcs.dart';
@@ -9,9 +12,37 @@ const funcChar = r"$";
 const separator = ",";
 
 /// Return true if the given expression is truthful.
-/// TODO: think how to implement it.
 bool isTrue(String expression) {
-  return true;
+  expression = "|" + expression.replaceAll(" ", "");
+  int position = 0;
+  bool ret = true;
+  while (position < expression.length) {
+    bool toAnd = expression[position++] == "&";
+    bool negate = expression[position] == "!";
+    if (negate) {
+      position++;
+    }
+    bool value = true;
+    if (expression[position] == "(") {
+      int closingBracesPos = closingBracesPosition(expression, position,
+          "(", ")");
+      value = isTrue(expression.substring(position+1, closingBracesPos));
+      position = closingBracesPos + 1;
+    } else {
+      String name = "";
+      while(expression[position] != "&" && expression[position] != "|") {
+        name += expression[position++];
+      }
+      value = Itinerary.contains(name);
+    }
+    value ^= negate;
+    if (toAnd) {
+      ret &= value;
+    } else {
+      ret |= value;
+    }
+  }
+  return ret;
 }
 
 /// Find the position of adequate closing braces.
