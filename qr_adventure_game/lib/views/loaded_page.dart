@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../controllers/itinerary.dart';
 import '../controllers/parser.dart';
+import '../controllers/parser_funcs.dart';
 
 /// The page which is scanned from a QR code.
 class LoadedPage extends StatelessWidget {
@@ -10,6 +11,7 @@ class LoadedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    buildContext = context;
     return Scaffold(
       body: Stack(
         children: [

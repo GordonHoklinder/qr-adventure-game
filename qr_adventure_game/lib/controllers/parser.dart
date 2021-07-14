@@ -73,7 +73,6 @@ int closingBracesPosition(String text, int position,
 
 /// Get the text to the next quotes.
 List getText(String text, int position) {
-  // TODO: don't do it in O(n^2).
   String ret = "";
   assert(text[position] == quotes);
   position++;
@@ -89,6 +88,27 @@ List getText(String text, int position) {
   return [ret, position + 1];
 }
 
+/// Splits the text on separators.
+/// Jump on quotes and braces.
+List<String> split(String text) {
+  List<String> ret = [];
+  String current = "";
+  for(int position = 0; position < text.length; position++) {
+    if (text[position] == quotes) {
+      final result = getText(text, position);
+      position = result[1] - 1;
+      current += result[0];
+    } else if (text[position] == separator) {
+      ret.add(current);
+      current = "";
+    } else {
+      current += text[position];
+    }
+  }
+  ret.add(current);
+  return ret;
+}
+
 /// Get the function name and its parameters.
 List getFunction(String text, int position) {
   assert(text[position] == funcChar);
@@ -99,9 +119,7 @@ List getFunction(String text, int position) {
   int closingBracesPos = closingBracesPosition(text, position, "(", ")");
   String name = text.substring(position + 1, openingBracesPos)
       .replaceAll(" ", "");
-  // TODO: make this bulletproof.
-  List params = text.substring(openingBracesPos + 1, closingBracesPos)
-      .split(separator);
+  List params = split(text.substring(openingBracesPos + 1, closingBracesPos));
   openingBracesPos = closingBracesPos + 1;
   while (text[openingBracesPos] == " ") {
     openingBracesPos++;
@@ -125,30 +143,34 @@ List<Widget> parseCode(String code) {
   List<Widget> ret = [];
   code = preprocess(code);
   int position = 0;
-  while(position < code.length) {
-    if (code[position] == " ") {
-      position++;
-    } else if (code[position] == quotes) {
-      List result = getText(code, position);
-      position = result[1];
-      ret.add(text(result[0]));
-    } else if (code[position] == funcChar) {
-      List result = getFunction(code, position);
-      if (!funcs.containsKey(result[0])) {
-        throw Exception("Function ${result[0]} does not exist.");
+  try {
+    while (position < code.length) {
+      if (code[position] == " ") {
+        position++;
+      } else if (code[position] == quotes) {
+        List result = getText(code, position);
+        position = result[1];
+        ret.add(text(result[0]));
+      } else if (code[position] == funcChar) {
+        List result = getFunction(code, position);
+        if (!funcs.containsKey(result[0])) {
+          throw Exception("Function ${result[0]} does not exist.");
+        }
+        ParsedFunction funcObject = funcs[result[0]];
+        if (funcObject.argsCount != result[1].length) {
+          throw Exception("Function ${result[0]} was called with"
+              "${result[1].length} arguments, but ${funcObject.argsCount} were"
+              "expected.");
+        }
+        List<Widget> widgets = funcObject.function(result[1]);
+        ret.addAll(widgets);
+        position = result[2];
+      } else {
+        throw Exception("Unexpected character ${code[position]}.");
       }
-      ParsedFunction funcObject = funcs[result[0]];
-      if (funcObject.argsCount != result[1].length) {
-        throw Exception("Function ${result[0]} was called with"
-            "${result[1].length} arguments, but ${funcObject.argsCount} were"
-            "expected.");
-      }
-      List<Widget> widgets = funcObject.function(result[1]);
-      ret.addAll(widgets);
-      position = result[2];
-    } else {
-      throw Exception("Unexpected character ${code[position]}.");
     }
+  } catch(e) {
+    return [error(e)];
   }
 
   return ret;
