@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_adventure_game/routes/animatable_route.dart';
 import 'package:qr_adventure_game/views/loaded_page.dart';
 
 import 'itinerary.dart';
@@ -57,9 +58,8 @@ List<Widget> option(List<String> args) {
   return [
     ElevatedButton(
       // Should be done via navigation.
-      onPressed: () => {
-        //Navigator.of(buildContext!).pushReplacement(AnimatedRoute(LoadedPage(args[1])));
-      },
+      onPressed: () => Navigator.of(buildContext!).pushReplacement(
+          AnimatableRoute(builder: (context) => LoadedPage(args[1]))),
     child: Text(args[0],
     style: TextStyle(
       fontSize: 12,
