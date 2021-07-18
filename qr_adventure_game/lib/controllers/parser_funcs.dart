@@ -71,7 +71,7 @@ List<Widget> option(List<String> args) {
 /// If the expression is true, execute the code inside.
 List<Widget> iff(List<String> args) {
   assert(args.length == 2);
-  if (isTrue(args[0])) {
+  if (isExpressionTrue(args[0])) {
     return parseCode(args[1]);
   }
   return [];
@@ -80,6 +80,6 @@ List<Widget> iff(List<String> args) {
 Map funcs = {
   "if" : ParsedFunction(2, iff),
   "title" : ParsedFunction(2, title),
-  "add" : ParsedFunction(2, add),
+  "add" : ParsedFunction(1, add),
   "option" : ParsedFunction(2, option),
 };

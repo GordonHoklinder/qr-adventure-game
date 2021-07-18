@@ -12,12 +12,15 @@ const funcChar = r"$";
 const separator = ",";
 
 /// Return true if the given expression is truthful.
-bool isTrue(String expression) {
-  expression = "|" + expression.replaceAll(" ", "");
+bool isExpressionTrue(String expression) {
+  expression = "&" + expression.replaceAll(" ", "") +  "|";
   int position = 0;
   bool ret = true;
   while (position < expression.length) {
     bool toAnd = expression[position++] == "&";
+    if (position == expression.length) {
+      break;
+    }
     bool negate = expression[position] == "!";
     if (negate) {
       position++;
@@ -26,7 +29,7 @@ bool isTrue(String expression) {
     if (expression[position] == "(") {
       int closingBracesPos = closingBracesPosition(expression, position,
           "(", ")");
-      value = isTrue(expression.substring(position+1, closingBracesPos));
+      value = isExpressionTrue(expression.substring(position+1, closingBracesPos));
       position = closingBracesPos + 1;
     } else {
       String name = "";
@@ -83,13 +86,16 @@ List getText(String text, int position) {
     if (position == text.length) {
       throw Exception("There's no matching closing quote.");
     }
-    ret += text[position];
+    ret += text[position++];
+    if (position == text.length) {
+      throw Exception("There's no matching closing quote.");
+    }
   }
   return [ret, position + 1];
 }
 
 /// Splits the text on separators.
-/// Jump on quotes and braces.
+/// Jump on quotes.
 List<String> split(String text) {
   List<String> ret = [];
   String current = "";
@@ -97,7 +103,7 @@ List<String> split(String text) {
     if (text[position] == quotes) {
       final result = getText(text, position);
       position = result[1] - 1;
-      current += result[0];
+      current += "'" + result[0] + "'";
     } else if (text[position] == separator) {
       ret.add(current);
       current = "";
@@ -116,17 +122,17 @@ List getFunction(String text, int position) {
   while (text[openingBracesPos] != "(") {
     openingBracesPos++;
   }
-  int closingBracesPos = closingBracesPosition(text, position, "(", ")");
+  int closingBracesPos = closingBracesPosition(text, openingBracesPos, "(", ")");
   String name = text.substring(position + 1, openingBracesPos)
       .replaceAll(" ", "");
   List params = split(text.substring(openingBracesPos + 1, closingBracesPos));
   openingBracesPos = closingBracesPos + 1;
-  while (text[openingBracesPos] == " ") {
+  while (openingBracesPos != text.length && text[openingBracesPos] == " ") {
     openingBracesPos++;
   }
   // If the last parameter is given in curly braces.
-  if (text[openingBracesPos] == "{") {
-    closingBracesPos = closingBracesPosition(text, position, "{", "}");
+  if (openingBracesPos != text.length && text[openingBracesPos] == "{") {
+    closingBracesPos = closingBracesPosition(text, openingBracesPos, "{", "}");
     params.add(text.substring(openingBracesPos + 1, closingBracesPos));
   }
   return [name, params, closingBracesPos + 1];
@@ -158,8 +164,8 @@ List<Widget> parseCode(String code) {
         }
         ParsedFunction funcObject = funcs[result[0]];
         if (funcObject.argsCount != result[1].length) {
-          throw Exception("Function ${result[0]} was called with"
-              "${result[1].length} arguments, but ${funcObject.argsCount} were"
+          throw Exception("Function ${result[0]} was called with "
+              "${result[1].length} arguments, but ${funcObject.argsCount} were "
               "expected.");
         }
         List<Widget> widgets = funcObject.function(result[1]);
