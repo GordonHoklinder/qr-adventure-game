@@ -26,7 +26,7 @@ A sample code:
 $title(Locked_drawer, drawer5)
 'You\'ve come across a locked drawer. What will you do?'
 $if(key|crowbar) {
-  $option(Unlock it) {
+  $option(Unlock_it) {
 	  'You found a diary!'
 		$add(diary)
   }
@@ -37,5 +37,42 @@ The title function displays a title *Locked drawer* and saves that the user has 
 
 Below is displayed text *You've come across a locked drawer. What will you do?*.
 
-If the user has item *key* or item *crowbar*, the button with text *unlock* is displayed. When clicked text *You found a diary!* is displayed and an item diary is added to inventory.
+If the user has item *key* or item *crowbar*, the button with text *unlock* is displayed. When clicked, text *You found a diary!* is displayed and an item diary is added to inventory.
 
+Functions
+---------
+
+This is the list of functions which are currently supported.
+
+### If
+`$if(expression) { code }`
+
+Conditionally executes code.
+
+* The *expression* consists of items / page ids and logical operators |, & and !. It can also contain braces. The items evaluate to true if they are in itinerary and to false otherwise (analogously for page ids).
+* The *code* is executed if the *expression* evaluates to true.
+
+### Add
+`$add(item)`
+
+Adds the item *item* to itinerary
+
+### Title
+`$title(text, id)`
+
+Adds a title with text *text* and ads a visited page with id *id* to the itinerary.
+
+### Option
+`$option(text) { code }`
+
+Displays a clickable button.
+
+* *Text* is displayed on the button.
+* When clicked the button navigates to a new page described by *code*.
+
+How to use the app
+==================
+
+The app was developed by @composerPigeon and @GordonHoklinder. Many thanks to @Keiky and @Yokto13 for their advice and help.
+
+It can be used freely. If one finds it sufficient as it is, the app can be downloaded from Play Store as QRAdventureGame by publisher Whizzmot (the exact link will be added) and the only thing left to do is prepare the QR codes. If there are some features missing, feel free to raise an issue or create a pull request. Additionally one can fork the repositary and publish it themselves.
