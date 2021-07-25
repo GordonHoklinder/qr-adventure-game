@@ -24,7 +24,7 @@ class TestLoadedPageApp extends StatelessWidget {
       ),
       home: LoadedPage(
           r"'Hello qr!'"
-          r"$option(click me) {"
+          r"$option(click_me) {"
           r"  'So close!'"
           r"  $option(again) {"
           r"    'You made it!'"

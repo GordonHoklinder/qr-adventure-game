@@ -47,6 +47,13 @@ void main() {
     expect(isExpressionTrue('true&!(true&false)'), true);
     expect(isExpressionTrue('true&!(true&false)'), true);
   });
+  test('preprocess alters the code correctly', () {
+    expect(preprocess("'\n'"), "' '");
+    expect(preprocess("  \n"), "");
+    expect(preprocess("hello_whizzmot"), "hello whizzmot");
+    expect(preprocess("  a_b \t ' _'"), "a b' _'");
+    expect(preprocess("''x"), "''x");
+  });
   test('parseCode returns correct number of elements', () {
     expect(parseCode(
         r"'Ahoj'$if(false){'ne'}$add(true)$if(true){'jo'}"
@@ -65,7 +72,7 @@ void main() {
     ).length, 3);
     expect(parseCode(
         r"'Hello qr!'"
-        r"$option(click me) {"
+        r"$option(click_me) {"
         r"  $option(again) {"
         r"    'You made it!'"
         r"  }"
