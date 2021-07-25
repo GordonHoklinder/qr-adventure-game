@@ -11,13 +11,13 @@ How to write text in QR codes
 =============================
 The code in QR codes is quite simple and consists of two units.
 
-* Text
-  * This is written inside a single quotes.
-	* Single quotes and backslashes are escaped by backslashes (i.e. '\'' prints a single quote and '\\' a backslash).
-	* The text is printed to the page
-* Functions
-  * Functions start with a dollar sign, then goes the function name followed by round braces in which the function arguements are written separated by commas. If the function takes code as the last arguement, it should be written inside curly braces which follow the closing round brace.
-	* There are a lot of functions enabling more complex behaviour the simple text printing. They are described below.
++ Text
+  + This is written inside a single quotes.
+  + Single quotes and backslashes are escaped by backslashes (i.e. '\'' prints a single quote and '\\' a backslash).
+  + The text is printed to the page
++ Functions
+  + Functions start with a dollar sign, then goes the function name followed by round braces in which the function arguements are written separated by commas. If the function takes code as the last arguement, it should be written inside curly braces which follow the closing round brace.
+  + There are a lot of functions enabling more complex behaviour the simple text printing. They are described below.
 
 A sample code:
 --------------
@@ -49,8 +49,8 @@ This is the list of functions which are currently supported.
 
 Conditionally executes code.
 
-* The *expression* consists of items / page ids and logical operators |, & and !. It can also contain braces. The items evaluate to true if they are in itinerary and to false otherwise (analogously for page ids).
-* The *code* is executed if the *expression* evaluates to true.
++ The *expression* consists of items / page ids and logical operators |, & and !. It can also contain braces. The items evaluate to true if they are in itinerary and to false otherwise (analogously for page ids).
++ The *code* is executed if the *expression* evaluates to true.
 
 ### Add
 `$add(item)`
@@ -72,8 +72,8 @@ Adds a title with text *text* and ads a visited page with id *id* to the itinera
 
 Displays a clickable button.
 
-* *Text* is displayed on the button.
-* When clicked the button navigates to a new page described by *code*.
++ *Text* is displayed on the button.
++ When clicked the button navigates to a new page described by *code*.
 
 How to use the app
 ==================
