@@ -59,6 +59,9 @@ void main() {
         r"'Ahoj'$if(false){'ne'}$add(true)$if(true){'jo'}"
     ).length, 2);
     expect(parseCode(
+        r"$ThrowException()$ThrowException()"
+    ).length, 1);
+    expect(parseCode(
       r"'Hello qr!'"
       r"$add(true)"
       r"$if(false) {"
@@ -70,6 +73,14 @@ void main() {
       r"}"
       r"$title(title, title)"
     ).length, 3);
+    expect(parseCode(
+        r"$add(false)"
+        r"$remove(false)"
+        r"$if(false) {"
+        r"  'This is bad'"
+        r"  'Very bad'"
+        r"}"
+    ).length, 0);
     expect(parseCode(
         r"'Hello qr!'"
         r"$option(click_me) {"

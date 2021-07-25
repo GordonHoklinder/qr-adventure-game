@@ -22,4 +22,9 @@ class Itinerary {
     }
   }
 
+  /// Remove [item] from [items].
+  static void removeItem(String item) {
+    items.remove(item);
+  }
+
 }
