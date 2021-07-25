@@ -57,6 +57,11 @@ Conditionally executes code.
 
 Adds the item *item* to itinerary
 
+### Remove
+`$remove(item)`
+
+Removes the item *item* from itinerary
+
 ### Title
 `$title(text, id)`
 
