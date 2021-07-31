@@ -8,14 +8,40 @@ class LoadedPage extends StatelessWidget {
   final String code;
   LoadedPage(this.code);
 
-
   @override
   Widget build(BuildContext context) {
     buildContext = context;
     return Scaffold(
       body: Stack(
         children: [
-          // Here goes navigation bar.
+          Align(
+            alignment: Alignment.topCenter,
+            child: Column(
+              children: [
+                SizedBox(height: MediaQuery.of(context).padding.top,),
+                Row(
+                  children: [
+                    IconButton(
+                        onPressed: () => {Navigator.pushNamed(context, 'itinerary')},
+                        iconSize: Theme.of(context).iconTheme.size as double,
+                        icon: Icon(
+                          Icons.widgets_rounded,
+                          color: Theme.of(context).iconTheme.color,
+                        )
+                    ),
+                    IconButton(
+                        onPressed: () => {Navigator.pushNamed(context, 'qr_scan')},
+                        iconSize: Theme.of(context).iconTheme.size as double,
+                        icon: Icon(
+                          Icons.qr_code_scanner_rounded,
+                          color: Theme.of(context).iconTheme.color,
+                        )
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(

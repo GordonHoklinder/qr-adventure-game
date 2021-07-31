@@ -10,7 +10,6 @@ const quotes = "'";
 const escaper = "\\";
 const funcChar = r"$";
 const separator = ",";
-const underscore = "_";
 
 /// Return true if the given expression is truthful.
 bool isExpressionTrue(String expression) {
@@ -104,7 +103,7 @@ List<String> split(String text) {
     if (text[position] == quotes) {
       final result = getText(text, position);
       position = result[1] - 1;
-      current += quotes + result[0] + quotes;
+      current += "'" + result[0] + "'";
     } else if (text[position] == separator) {
       ret.add(current);
       current = "";
@@ -139,26 +138,9 @@ List getFunction(String text, int position) {
   return [name, params, closingBracesPos + 1];
 }
 
-/// Preprocess the code.
-///
 /// Replace all whitespaces by normal spaces.
-/// Remove whitespace outside quotes
-/// Replace underscores by spaces outside quotes.
 String preprocess (String raw) {
-  raw = raw.replaceAll(RegExp(r"\s"), " ");
-  String ret = "";
-  for(int i = 0; i < raw.length; i++) {
-    if (raw[i] == quotes) {
-      final res = getText(raw, i);
-      i = res[1] - 1;
-      ret += quotes + res[0] + quotes;
-    } else if (raw[i] == underscore) {
-      ret += " ";
-    } else if (raw[i] != " ") {
-      ret += raw[i];
-    }
-  }
-  return ret;
+  return raw.replaceAll(RegExp(r"\d"), " ");
 }
 
 
