@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_adventure_game/routes/animatable_route.dart';
 import 'package:qr_adventure_game/views/loaded_page.dart';
 
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -19,6 +20,7 @@ class _QrScanPageState extends State<QrScanPage> {
   final qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   Barcode? barcode;
+  late BuildContext context;
 
   @override
   void dispose(){
@@ -39,6 +41,7 @@ class _QrScanPageState extends State<QrScanPage> {
 
   @override
   Widget build(BuildContext context) {
+    this.context =context;
     return SafeArea(
         child: Scaffold(
           body: Stack(
@@ -97,7 +100,9 @@ class _QrScanPageState extends State<QrScanPage> {
     setState(() => this.controller = controller);
 
     controller.scannedDataStream.listen(
-            (barcode) => setState(() => this.barcode = barcode)
+        (barcode) => Navigator.of(this.context).push(
+          AnimatableRoute(builder: (context) => LoadedPage(barcode.code)))
+      //(barcode) => setState(() => this.barcode = barcode)
     );
   }
 }
