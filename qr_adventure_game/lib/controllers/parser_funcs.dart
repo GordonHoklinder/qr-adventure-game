@@ -35,7 +35,14 @@ Widget error(Object e) {
 /// Add an item to itinerary
 List<Widget> add(List<String> args) {
   assert(args.length == 1);
-  Itinerary.add(args[0].replaceAll(" ", ""), true);
+  Itinerary.add(args[0], true);
+  return [];
+}
+
+/// Add an item to itinerary
+List<Widget> remove(List<String> args) {
+  assert(args.length == 1);
+  Itinerary.removeItem(args[0]);
   return [];
 }
 
@@ -81,5 +88,6 @@ Map funcs = {
   "if" : ParsedFunction(2, iff),
   "title" : ParsedFunction(2, title),
   "add" : ParsedFunction(1, add),
+  "remove" : ParsedFunction(1, remove),
   "option" : ParsedFunction(2, option),
 };

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 import 'controllers/navigator.dart';
 
 
@@ -30,7 +31,6 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-
       initialRoute: 'home',
       routes: navigation,
     );
