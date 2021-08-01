@@ -54,6 +54,10 @@ void main() {
     expect(preprocess("  a_b \t ' _'"), "a b' _'");
     expect(preprocess("''x"), "''x");
   });
+  test('Decrypt decodes text correctly', () {
+    expect(decrypt("nhvns(!mp{!pyv"), "hello whizzmot");
+    expect(decrypt("gkyl\$ qn60"), "ahoj whiíí");
+  });
   test('parseCode returns correct number of elements', () {
     expect(parseCode(
         r"'Ahoj'$if(false){'ne'}$add(true)$if(true){'jo'}"

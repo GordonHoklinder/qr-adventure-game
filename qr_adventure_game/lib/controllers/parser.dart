@@ -6,6 +6,12 @@ import 'package:qr_adventure_game/models/parsed_function.dart';
 
 import 'parser_funcs.dart';
 
+// Disable if you do not want the QR codes decrypted.
+const encryption = true;
+// The key to Vernam cipher.
+const key = [6, 3, 10, 2, 4, 8, 9, 5, 7, 1];
+
+// Config
 const quotes = "'";
 const escaper = "\\";
 const funcChar = r"$";
@@ -159,6 +165,22 @@ String preprocess (String raw) {
     }
   }
   return ret;
+}
+
+/// Use a Vernam cipher to decrypt the code.
+///
+/// This is not cryptographically strong cipher!
+/// Just to ensure the code can't be read from different app.
+String decrypt (String encrypted) {
+  String decrypted = "";
+  for (int i = 0; i < encrypted.length; i++) {
+    int ord = encrypted.codeUnitAt(i) - key[i % key.length];
+    if (ord < 32) {
+      ord += 95;
+    }
+    decrypted += String.fromCharCode(ord);
+  }
+  return decrypted;
 }
 
 
