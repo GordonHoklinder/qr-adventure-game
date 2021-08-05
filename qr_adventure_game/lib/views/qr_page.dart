@@ -58,6 +58,7 @@ class _QrScanPageState extends State<QrScanPage> {
     );
   }
 
+
   Widget buildQrView(BuildContext context) {
     return QRView(
       key: qrKey,
@@ -72,12 +73,13 @@ class _QrScanPageState extends State<QrScanPage> {
     );
   }
 
+  /// if some barcode is detected this function will display the result
   Widget buildResult() {
     if(barcode != null){
       return IconButton(
           onPressed: ()=>{Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => LoadedPage(barcode!.code))
+              AnimatableRoute(builder: (context) => LoadedPage(barcode!.code))
           )},
           iconSize: Theme.of(context).iconTheme.size as double,
           icon: Icon(
@@ -85,6 +87,9 @@ class _QrScanPageState extends State<QrScanPage> {
             color: Theme.of(context).primaryColor,
           )
       );
+      /*return Text(
+        barcode!.code
+      );*/
     }
     else {
       return Container(
@@ -96,13 +101,12 @@ class _QrScanPageState extends State<QrScanPage> {
   }
 
 
+  /// here u save the barcode whenever camera detects some qr-code
   void onQRViewCreated(QRViewController controller) {
     setState(() => this.controller = controller);
 
     controller.scannedDataStream.listen(
-        (barcode) => Navigator.of(this.context).push(
-          AnimatableRoute(builder: (context) => LoadedPage(barcode.code)))
-      //(barcode) => setState(() => this.barcode = barcode)
+      (barcode) => setState(() => this.barcode = barcode)
     );
   }
 }
