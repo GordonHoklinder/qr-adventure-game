@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qr_adventure_game/enums/page_type.dart';
+import 'package:qr_adventure_game/widgets/navbar.dart';
 
 import '/controllers/itinerary.dart';
 
@@ -45,33 +47,21 @@ class _ItineraryPageState extends State<ItineraryPage> {
     return Scaffold(
       body: Stack (
         children: [
-          Align(
+          // I think it should be only in the homepage.
+          // TODO: some background color.
+          /*Align(
             child: Image.asset(
               'assets/detectivePhoto.jpg',
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
             ),
-          ),
+          ),*/
           Align(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: MediaQuery.of(context).padding.top,
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                        onPressed: () => {Navigator.pop(context)},
-                        iconSize: Theme.of(context).iconTheme.size as double,
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Theme.of(context).iconTheme.color,
-                        )
-                    ),
-                  ],
-                ),
+                ...getNavbar(context, PageType.Itinerary),
                 ListView(
                   children: getListOfWidgets(),
                   shrinkWrap: true,

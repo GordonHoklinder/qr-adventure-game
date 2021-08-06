@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qr_adventure_game/enums/page_type.dart';
+import 'package:qr_adventure_game/widgets/navbar.dart';
 import '../controllers/itinerary.dart';
 import '../controllers/parser.dart';
 import '../controllers/parser_funcs.dart';
@@ -14,39 +16,16 @@ class LoadedPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset(
+          /*Image.asset(
             'assets/detectivePhoto.jpg',
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
-          ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Column(
-              children: [
-                SizedBox(height: MediaQuery.of(context).padding.top,),
-                Row(
-                  children: [
-                    IconButton(
-                        onPressed: () => {Navigator.pushNamed(context, 'itinerary')},
-                        iconSize: Theme.of(context).iconTheme.size as double,
-                        icon: Icon(
-                          Icons.widgets_rounded,
-                          color: Theme.of(context).iconTheme.color,
-                        )
-                    ),
-                    IconButton(
-                        onPressed: () => {Navigator.pushNamed(context, 'qr_scan')},
-                        iconSize: Theme.of(context).iconTheme.size as double,
-                        icon: Icon(
-                          Icons.qr_code_scanner_rounded,
-                          color: Theme.of(context).iconTheme.color,
-                        )
-                    ),
-                  ],
-                )
-              ],
-            ),
+          ),*/
+          Column(
+            children: [
+              ...getNavbar(context, PageType.Loaded)
+            ],
           ),
           Align(
             alignment: Alignment.bottomCenter,

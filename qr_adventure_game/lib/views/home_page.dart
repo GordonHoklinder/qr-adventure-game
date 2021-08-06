@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:qr_adventure_game/enums/page_type.dart';
+import 'package:qr_adventure_game/routes/animatable_route.dart';
+import 'package:qr_adventure_game/views/loaded_page.dart';
+import 'package:qr_adventure_game/widgets/navbar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,36 +21,10 @@ class HomePage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          /// navigation bar
-          Align(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).padding.top,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        onPressed: () => {Navigator.pushNamed(context, 'itinerary')},
-                        iconSize: Theme.of(context).iconTheme.size as double,
-                        icon: Icon(
-                          Icons.widgets_rounded,
-                          color: Theme.of(context).iconTheme.color,
-                        )
-                    ),
-                    IconButton(
-                        onPressed: () => {Navigator.pushNamed(context, 'qr_scan')},
-                        iconSize: Theme.of(context).iconTheme.size as double,
-                        icon: Icon(
-                          Icons.qr_code_scanner_rounded,
-                          color: Theme.of(context).iconTheme.color,
-                        )
-                    ),
-                  ]
-                ),
-              ]
-            )
+          Column(
+            children: [
+              ...getNavbar(context, PageType.Home)
+            ],
           )
         ]
       )
