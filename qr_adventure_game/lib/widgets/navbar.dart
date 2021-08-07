@@ -3,6 +3,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:qr_adventure_game/enums/page_type.dart';
 import 'package:qr_adventure_game/routes/animatable_route.dart';
 import 'package:qr_adventure_game/views/loaded_page.dart';
+import 'package:qr_adventure_game/widgets/text_icon.dart';
 
 /// Return a core of the app more or less common to all pages.
 List<Widget> getNavbar(BuildContext context, PageType pageType) {
@@ -18,14 +19,16 @@ List<Widget> getNavbar(BuildContext context, PageType pageType) {
           // Maybe there's a less tricky solution
           // but I couldn't find any.
           ...[
-          IconButton(
-              onPressed: () => {Navigator.pushNamed(context, 'itinerary')},
-              iconSize: Theme.of(context).iconTheme.size as double,
-              icon: Icon(
-                Icons.widgets_rounded,
-                color: Theme.of(context).iconTheme.color,
-              )),
-          IconButton(
+            TextIcon(
+                Icons.backpack_rounded,
+                "Batoh",
+                context,
+                onPressed: () => {Navigator.pushNamed(context, 'itinerary')},
+            ),
+            TextIcon(
+              Icons.qr_code_scanner_rounded,
+              "Skenovat",
+              context,
               onPressed: () async {
                 final code = await FlutterBarcodeScanner.scanBarcode(
                     "#004297", "Zrušit", true, ScanMode.QR);
@@ -35,26 +38,21 @@ List<Widget> getNavbar(BuildContext context, PageType pageType) {
                       builder: (context) => LoadedPage(code, true));
                   if(pageType == PageType.Home) {
                     Navigator.of(context).push(route);
-                        } else {
+                  } else {
                     Navigator.of(context).pushReplacement(route);
                   }
                 }
               },
-              iconSize: Theme.of(context).iconTheme.size as double,
-              icon: Icon(
-                Icons.qr_code_scanner_rounded,
-                color: Theme.of(context).iconTheme.color,
-              )),
+            ),
         ],
         if (pageType == PageType.Itinerary)
-          IconButton(
+            TextIcon(
+              Icons.arrow_back,
+              "Zpět",
+              context,
               onPressed: () => {Navigator.pop(context)},
-              iconSize: Theme.of(context).iconTheme.size as double,
-              icon: Icon(
-                Icons.arrow_back,
-                color: Theme.of(context).iconTheme.color,
-              )),
-      ],
+            ),
+            ],
     ),
   ];
 }

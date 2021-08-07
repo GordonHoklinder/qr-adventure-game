@@ -32,7 +32,7 @@ class _ItineraryPageState extends State<ItineraryPage> {
         Align(
           alignment: Alignment.center,
           child: Text(
-            'Inventář je prázdný',
+            'Batoh je prázdný',
             style: Theme.of(context).textTheme.bodyText2
           )
         )

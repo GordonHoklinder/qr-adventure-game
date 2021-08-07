@@ -31,7 +31,7 @@ class LoadedPage extends StatelessWidget {
             child: Container(
               // The subtracted number shall be bound to a variable
               // with size of the navbar.
-              height: MediaQuery.of(context).size.height - 100,
+              height: MediaQuery.of(context).size.height - 120,
               width: MediaQuery.of(context).size.width,
               child: SingleChildScrollView(
                 child: Column(
