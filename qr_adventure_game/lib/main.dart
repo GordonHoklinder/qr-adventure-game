@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'controllers/navigator.dart';
 
 
+// Here set the colors of the app.
+const primaryColor = Colors.amber;
+const contrastColor = Colors.white;
+
 void main() {
   runApp(MyApp());
 }
@@ -15,23 +19,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'QR Adventura',
       theme: ThemeData(
-        primaryColor: Colors.brown[400],
+        primaryColor: primaryColor,
         iconTheme: IconThemeData(
           //color: Colors.white,
-          color: Colors.amberAccent,
+          color: primaryColor,
           size: 60,
         ),
         textTheme: TextTheme(
           bodyText1: TextStyle(
-            color: Colors.black,
-            fontSize: 40,
+            color: contrastColor,
+            fontSize: 20,
           ),
           bodyText2: TextStyle(
             //color: Colors.white,
             color: Colors.black,
-            fontSize: 40,
+            fontSize: 20,
           )
-        )
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(primary: primaryColor),
+        ),
       ),
       initialRoute: 'home',
       routes: navigation,
