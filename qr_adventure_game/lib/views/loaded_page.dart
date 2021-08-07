@@ -23,18 +23,19 @@ class LoadedPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),*/
           Column(
-            children: [
-              ...getNavbar(context, PageType.Loaded)
-            ],
+            children: [...getNavbar(context, PageType.Loaded)],
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               // The subtracted number shall be bound to a variable
               // with size of the navbar.
-              height: MediaQuery.of(context).size.height - 50,
-              child: Column(
-                children: parseCode(code),
+              height: MediaQuery.of(context).size.height - 100,
+              width: MediaQuery.of(context).size.width,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: parseCode(code),
+                ),
               ),
             ),
           ),

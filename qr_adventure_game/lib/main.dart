@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.brown[400],
         iconTheme: IconThemeData(
-          color: Colors.white,
+          //color: Colors.white,
+          color: Colors.amberAccent,
           size: 60,
         ),
         textTheme: TextTheme(
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
             fontSize: 40,
           ),
           bodyText2: TextStyle(
-            color: Colors.white,
+            //color: Colors.white,
+            color: Colors.black,
             fontSize: 40,
           )
         )
