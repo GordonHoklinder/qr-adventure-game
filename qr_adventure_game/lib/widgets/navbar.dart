@@ -29,8 +29,16 @@ List<Widget> getNavbar(BuildContext context, PageType pageType) {
               onPressed: () async {
                 final code = await FlutterBarcodeScanner.scanBarcode(
                     "#004297", "Zrušit", true, ScanMode.QR);
-                Navigator.of(context).push(
-                    AnimatableRoute(builder: (context) => LoadedPage(code)));
+                // The widget we use, returns "-1" if the user pressed cancel.
+                if (code != "-1") {
+                  final route = AnimatableRoute(
+                      builder: (context) => LoadedPage(code, true));
+                  if(pageType == PageType.Home) {
+                    Navigator.of(context).push(route);
+                        } else {
+                    Navigator.of(context).pushReplacement(route);
+                  }
+                }
               },
               iconSize: Theme.of(context).iconTheme.size as double,
               icon: Icon(

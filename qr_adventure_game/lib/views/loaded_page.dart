@@ -8,7 +8,8 @@ import '../controllers/parser_funcs.dart';
 /// The page which is scanned from a QR code.
 class LoadedPage extends StatelessWidget {
   final String code;
-  LoadedPage(this.code);
+  final bool encrypted;
+  LoadedPage(this.code, [this.encrypted = false]);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class LoadedPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: SingleChildScrollView(
                 child: Column(
-                  children: parseCode(code),
+                  children: parseCode(code, this.encrypted),
                 ),
               ),
             ),

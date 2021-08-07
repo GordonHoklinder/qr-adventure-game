@@ -30,7 +30,6 @@ const funcChar = r"$";
 const separator = ",";
 const underscore = "_";
 
-bool encryption = true;
 
 /// Return true if the given expression is truthful.
 bool isExpressionTrue(String expression) {
@@ -199,7 +198,7 @@ String decrypt (String encrypted) {
 
 
 /// Return the widgets described in the QR code's code.
-List<Widget> parseCode(String code) {
+List<Widget> parseCode(String code, [bool encryption = false]) {
   // If encryption is opted on, decode the code.
   if (encryption) {
     code = decrypt(code);
