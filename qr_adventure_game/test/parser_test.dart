@@ -55,10 +55,11 @@ void main() {
     expect(preprocess("''x"), "''x");
   });
   test('Decrypt decodes text correctly', () {
-    expect(decrypt("nhvns(!mp{!pyv"), "hello whizzmot");
-    expect(decrypt("gkyl\$ qn60"), "ahoj whiíí");
+    expect(decrypt("fČĎĎr ifPZZŠrE"), "hello whizzmot");
+    expect(decrypt("cGŽžú!"), "Čauky!");
   });
   test('parseCode returns correct number of elements', () {
+    encryption = false;
     expect(parseCode(
         r"'Ahoj'$if(false){'ne'}$add(true)$if(true){'jo'}"
     ).length, 2);
@@ -92,6 +93,10 @@ void main() {
         r"    'You made it!'"
         r"  }"
         r"}"
+    ).length, 2);
+    encryption = true;
+    expect(parseCode(
+      "ufČĎĎru řEPEĎČJfPC ťyČČEPĕť1b"
     ).length, 2);
   });
 }

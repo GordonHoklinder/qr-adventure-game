@@ -1,4 +1,5 @@
-KEY = [6, 3, 10, 2, 4, 8, 9, 5, 7, 1]
+ALPHABET1 = [c for c in "aábcčdďeéĕfghiíjklmnňoópqrřsštťuúůvwxyýzžAÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ.,?{}()'$_"]
+ALPHABET2 = [c for c in "GHz(QLŮČOí?ťfPg{žĎŠĕár_aÚyRNYEňŽŤDŘi.úkZpšmý'ctó,SeéXůAÁčsvwI)xKVBjTdU}qWÝ$ÍĚÉlhÓoŇCFnMJbuřď"]
 
 raw = []
 while(True):
@@ -6,11 +7,10 @@ while(True):
         raw.append(input())
     except:
         raw = " ".join(raw)
-        print(raw)
         encoded = "".join([
-            chr((KEY[i % len(KEY)] + max(0, ord(x) - 32)) % 95 + 32) for i, x in enumerate(raw)
+            ALPHABET2[ALPHABET1.index(c)] if c in ALPHABET1 else c
+            for c in raw
         ])
-        print()
         print(encoded)
         break
 
