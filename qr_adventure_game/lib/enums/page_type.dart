@@ -1,5 +1,1 @@
-enum PageType {
-  Home,
-  Itinerary,
-  Loaded
-}
+enum PageType { Home, Itinerary, Loaded }

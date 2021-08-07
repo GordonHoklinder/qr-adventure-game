@@ -2,5 +2,6 @@
 class ParsedFunction {
   final int argsCount;
   final function;
+
   ParsedFunction(this.argsCount, this.function);
 }

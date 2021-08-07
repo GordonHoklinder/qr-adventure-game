@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:qr_adventure_game/routes/animatable_route.dart';
 import 'package:qr_adventure_game/routes/route_generator.dart';
 
-
 import 'controllers/navigator.dart';
-
 
 // Here set the colors of the app.
 const primaryColor = Colors.amber;
@@ -28,16 +25,15 @@ class MyApp extends StatelessWidget {
           size: 60,
         ),
         textTheme: TextTheme(
-          bodyText1: TextStyle(
-            color: contrastColor,
-            fontSize: 20,
-          ),
-          bodyText2: TextStyle(
-            //color: Colors.white,
-            color: Colors.black,
-            fontSize: 20,
-          )
-        ),
+            bodyText1: TextStyle(
+              color: contrastColor,
+              fontSize: 20,
+            ),
+            bodyText2: TextStyle(
+              //color: Colors.white,
+              color: Colors.black,
+              fontSize: 20,
+            )),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(primary: primaryColor),
         ),
@@ -48,4 +44,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

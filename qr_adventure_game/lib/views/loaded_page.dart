@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_adventure_game/enums/page_type.dart';
 import 'package:qr_adventure_game/widgets/navbar.dart';
-import '../controllers/itinerary.dart';
+
 import '../controllers/parser.dart';
 import '../controllers/parser_funcs.dart';
 
@@ -9,6 +9,7 @@ import '../controllers/parser_funcs.dart';
 class LoadedPage extends StatelessWidget {
   final String code;
   final bool encrypted;
+
   LoadedPage(this.code, [this.encrypted = false]);
 
   @override

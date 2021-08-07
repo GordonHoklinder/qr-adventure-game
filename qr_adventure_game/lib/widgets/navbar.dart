@@ -19,40 +19,40 @@ List<Widget> getNavbar(BuildContext context, PageType pageType) {
           // Maybe there's a less tricky solution
           // but I couldn't find any.
           ...[
-            TextIcon(
-                Icons.backpack_rounded,
-                "Batoh",
-                context,
-                onPressed: () => {Navigator.pushNamed(context, 'itinerary')},
-            ),
-            TextIcon(
-              Icons.qr_code_scanner_rounded,
-              "Skenovat",
-              context,
-              onPressed: () async {
-                final code = await FlutterBarcodeScanner.scanBarcode(
-                    "#004297", "Zrušit", true, ScanMode.QR);
-                // The widget we use, returns "-1" if the user pressed cancel.
-                if (code != "-1") {
-                  final route = AnimatableRoute(
-                      builder: (context) => LoadedPage(code, true));
-                  if(pageType == PageType.Home) {
-                    Navigator.of(context).push(route);
-                  } else {
-                    Navigator.of(context).pushReplacement(route);
-                  }
+          TextIcon(
+            Icons.backpack_rounded,
+            "Batoh",
+            context,
+            onPressed: () => {Navigator.pushNamed(context, 'itinerary')},
+          ),
+          TextIcon(
+            Icons.qr_code_scanner_rounded,
+            "Skenovat",
+            context,
+            onPressed: () async {
+              final code = await FlutterBarcodeScanner.scanBarcode(
+                  "#004297", "Zrušit", true, ScanMode.QR);
+              // The widget we use, returns "-1" if the user pressed cancel.
+              if (code != "-1") {
+                final route = AnimatableRoute(
+                    builder: (context) => LoadedPage(code, true));
+                if (pageType == PageType.Home) {
+                  Navigator.of(context).push(route);
+                } else {
+                  Navigator.of(context).pushReplacement(route);
                 }
-              },
-            ),
+              }
+            },
+          ),
         ],
         if (pageType == PageType.Itinerary)
-            TextIcon(
-              Icons.arrow_back,
-              "Zpět",
-              context,
-              onPressed: () => {Navigator.pop(context)},
-            ),
-            ],
+          TextIcon(
+            Icons.arrow_back,
+            "Zpět",
+            context,
+            onPressed: () => {Navigator.pop(context)},
+          ),
+      ],
     ),
   ];
 }
