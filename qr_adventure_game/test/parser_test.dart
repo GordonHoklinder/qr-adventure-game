@@ -59,7 +59,6 @@ void main() {
     expect(decrypt("cGŽžú!"), "Čauky!");
   });
   test('parseCode returns correct number of elements', () {
-    encryption = false;
     expect(parseCode(
         r"'Ahoj'$if(false){'ne'}$add(true)$if(true){'jo'}"
     ).length, 2);
@@ -94,9 +93,8 @@ void main() {
         r"  }"
         r"}"
     ).length, 2);
-    encryption = true;
     expect(parseCode(
-      "ufČĎĎru řEPEĎČJfPC ťyČČEPĕť1b"
+      "ufČĎĎru řEPEĎČJfPC ťyČČEPĕť1b", true
     ).length, 2);
   });
 }
