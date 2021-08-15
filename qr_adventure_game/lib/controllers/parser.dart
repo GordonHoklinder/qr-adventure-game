@@ -1,206 +1,18 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:qr_adventure_game/controllers/itinerary.dart';
 import 'package:qr_adventure_game/models/parsed_function.dart';
 
 import 'parser_funcs.dart';
 
-// The alphabets to monoalphabetic substitution cipher.
-const alphabet1 = [
-  'a',
-  'á',
-  'b',
-  'c',
-  'č',
-  'd',
-  'ď',
-  'e',
-  'é',
-  'ĕ',
-  'f',
-  'g',
-  'h',
-  'i',
-  'í',
-  'j',
-  'k',
-  'l',
-  'm',
-  'n',
-  'ň',
-  'o',
-  'ó',
-  'p',
-  'q',
-  'r',
-  'ř',
-  's',
-  'š',
-  't',
-  'ť',
-  'u',
-  'ú',
-  'ů',
-  'v',
-  'w',
-  'x',
-  'y',
-  'ý',
-  'z',
-  'ž',
-  'A',
-  'Á',
-  'B',
-  'C',
-  'Č',
-  'D',
-  'Ď',
-  'E',
-  'É',
-  'Ě',
-  'F',
-  'G',
-  'H',
-  'I',
-  'Í',
-  'J',
-  'K',
-  'L',
-  'M',
-  'N',
-  'Ň',
-  'O',
-  'Ó',
-  'P',
-  'Q',
-  'R',
-  'Ř',
-  'S',
-  'Š',
-  'T',
-  'Ť',
-  'U',
-  'Ú',
-  'Ů',
-  'V',
-  'W',
-  'X',
-  'Y',
-  'Ý',
-  'Z',
-  'Ž',
-  '.',
-  ',',
-  '?',
-  '{',
-  '}',
-  '(',
-  ')',
-  "'",
-  '\$',
-  '_'
-];
-const alphabet2 = [
-  'G',
-  'H',
-  'z',
-  '(',
-  'Q',
-  'L',
-  'Ů',
-  'Č',
-  'O',
-  'í',
-  '?',
-  'ť',
-  'f',
-  'P',
-  'g',
-  '{',
-  'ž',
-  'Ď',
-  'Š',
-  'ĕ',
-  'á',
-  'r',
-  '_',
-  'a',
-  'Ú',
-  'y',
-  'R',
-  'N',
-  'Y',
-  'E',
-  'ň',
-  'Ž',
-  'Ť',
-  'D',
-  'Ř',
-  'i',
-  '.',
-  'ú',
-  'k',
-  'Z',
-  'p',
-  'š',
-  'm',
-  'ý',
-  "'",
-  'c',
-  't',
-  'ó',
-  ',',
-  'S',
-  'e',
-  'é',
-  'X',
-  'ů',
-  'A',
-  'Á',
-  'č',
-  's',
-  'v',
-  'w',
-  'I',
-  ')',
-  'x',
-  'K',
-  'V',
-  'B',
-  'j',
-  'T',
-  'd',
-  'U',
-  '}',
-  'q',
-  'W',
-  'Ý',
-  '\$',
-  'Í',
-  'Ě',
-  'É',
-  'l',
-  'h',
-  'Ó',
-  'o',
-  'Ň',
-  'C',
-  'F',
-  'n',
-  'M',
-  'J',
-  'b',
-  'u',
-  'ř',
-  'ď'
-];
+const ALPHABET = "aábcčdďeéĕfghiíjklmnňoópqrřsštťuúůvwxyýzžAÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ'„“-.,?!/:{}()|& ";
+
 
 // Config
 const quotes = "'";
-const escaper = "\\";
-const funcChar = r"$";
+const escaper = "|";
+const funcChar = "&";
 const separator = ",";
-const underscore = "_";
+const underscore = "-";
 
 /// Return true if the given expression is truthful.
 bool isExpressionTrue(String expression) {
@@ -359,11 +171,23 @@ String preprocess(String raw) {
 /// Just to ensure the code can't be read from plain QR scanner.
 String decrypt(String encrypted) {
   String decrypted = "";
-  for (int i = 0; i < encrypted.length; i++) {
-    if (alphabet1.contains(encrypted[i])) {
-      decrypted += alphabet1[alphabet2.indexOf(encrypted[i])];
-    } else {
+  for (int i = 0; i < encrypted.length;) {
+    if (i == encrypted.length - 1 || "0".compareTo(encrypted[i]) == 1 ||
+        "9".compareTo(encrypted[i]) == -1) {
       decrypted += encrypted[i];
+      i++;
+    } else if ("0".compareTo(encrypted[i+1]) == 1 ||
+        "9".compareTo(encrypted[i+1]) == -1) {
+      decrypted += encrypted.substring(i, i + 2);
+      i+=2;
+    } else if (encrypted.substring(i, i + 2) == "99") {
+      if (i != encrypted.length - 2) {
+        decrypted += encrypted[i + 2];
+      }
+      i+=3;
+    } else {
+      decrypted += ALPHABET[int.parse(encrypted.substring(i, i + 2))];
+      i+=2;
     }
   }
   return decrypted;
