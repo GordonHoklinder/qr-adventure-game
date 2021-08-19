@@ -6,9 +6,13 @@ class Itinerary {
   static HashSet<String> visited = HashSet<String>();
 
   /// Items in itinerary.
-  static HashSet<String> items = HashSet<String>();
+  // static HashSet<String> items = HashSet<String>();
 
-  // static HashSet<String> items = HashSet.from(['auto', 'klacek', 'trolejbus', 'tramvaj']);
+  static HashSet<String> items = HashSet.from([
+    'auto', 'klacek', 'trolejbus', 'tramvaj', 'klobouk', 'autobus', 'bagr', 'zadek',
+    'autom', 'klacekm', 'trolejbusm', 'tramvajm', 'kloboukm', 'autobusm', 'bagrm', 'list', 'pacidlo',
+    'vir'
+  ]);
 
   /// True if the element is either a visited page or a item in itinerary.
   static bool contains(String item) {

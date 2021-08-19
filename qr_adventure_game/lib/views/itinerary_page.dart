@@ -55,9 +55,14 @@ class _ItineraryPageState extends State<ItineraryPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ...getNavbar(context, PageType.Itinerary),
-            ListView(
-              children: getListOfWidgets(),
-              shrinkWrap: true,
+            Expanded(
+              flex: 1,
+              child: ListView(
+                children: getListOfWidgets(),
+                padding: EdgeInsets.all(10),
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+              ),
             ),
           ],
         )),
