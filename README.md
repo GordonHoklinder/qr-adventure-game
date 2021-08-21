@@ -102,4 +102,4 @@ How to use the app
 
 The app was developed by @composerPigeon and @GordonHoklinder. Many thanks to @Keiky and @Yokto13 for their advice and help.
 
-It can be used freely. If one finds it sufficient as it is, the app can be downloaded from Play Store as QR Adventure by publisher Whizzmot at https://play.google.com/store/apps/details?id=com.whizzmot.qr_adventure_game (available in Czech Republic only at this moment) and the only thing left to do is prepare the QR codes. If there are some features missing, feel free to raise an issue or create a pull request. Additionally one can fork the repositary and use this software as described in the LICENSE.txt
+It can be used freely. If one finds it sufficient as it is, the app can be downloaded from Play Store as QR Adventure by publisher Whizzmot at https://play.google.com/store/apps/details?id=com.whizzmot.qr_adventure_game (available in Czech Republic only at this moment) and the only thing left to do is prepare the QR codes. If there are some features missing, feel free to raise an issue or create a pull request. Additionally one can fork the repositary and use this software as described in the LICENSE.txt.
