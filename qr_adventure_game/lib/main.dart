@@ -4,7 +4,7 @@ import 'package:qr_adventure_game/routes/route_generator.dart';
 import 'controllers/navigator.dart';
 
 // Here set the colors of the app.
-const primaryColor = Colors.amber;
+const primaryColor = Colors.blue;
 const contrastColor = Colors.white;
 
 void main() {
