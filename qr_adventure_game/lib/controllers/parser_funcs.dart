@@ -1,3 +1,5 @@
+//import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:qr_adventure_game/routes/animatable_route.dart';
 import 'package:qr_adventure_game/views/loaded_page.dart';
@@ -10,11 +12,15 @@ BuildContext? buildContext;
 
 /// Add the text to the page.
 Widget text(String item) {
-  return Text(
-    item,
-    textAlign: TextAlign.justify,
-    style: TextStyle(
-      fontSize: 12,
+  return Container(
+    margin: EdgeInsets.fromLTRB(8, 8, 8, 0),
+    padding: EdgeInsets.all(8),
+    child: Text(
+      item,
+      textAlign: TextAlign.justify,
+      style: TextStyle(
+        fontSize: 15,
+      ),
     ),
   );
 }
