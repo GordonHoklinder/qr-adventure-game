@@ -10,11 +10,15 @@ BuildContext? buildContext;
 
 /// Add the text to the page.
 Widget text(String item) {
-  return Text(
-    item,
-    textAlign: TextAlign.justify,
-    style: TextStyle(
-      fontSize: 12,
+  return Container(
+    margin: EdgeInsets.fromLTRB(8, 8, 8, 0),
+    padding: EdgeInsets.all(8),
+    child: Text(
+      item,
+      textAlign: TextAlign.justify,
+      style: TextStyle(
+        fontSize: 15,
+      ),
     ),
   );
 }
