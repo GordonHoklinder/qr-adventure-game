@@ -18,12 +18,6 @@ class LoadedPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          /*Image.asset(
-            'assets/detectivePhoto.jpg',
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),*/
           Column(
             children: [...getNavbar(context, PageType.Loaded)],
           ),

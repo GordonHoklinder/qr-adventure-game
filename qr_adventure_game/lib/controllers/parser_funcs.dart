@@ -1,5 +1,3 @@
-//import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:qr_adventure_game/routes/animatable_route.dart';
 import 'package:qr_adventure_game/views/loaded_page.dart';

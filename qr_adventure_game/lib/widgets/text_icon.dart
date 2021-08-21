@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Display icon-button with text below.
 Widget TextIcon(IconData icon, String text, BuildContext context,
     {void Function()? onPressed}) {
   return Container(
