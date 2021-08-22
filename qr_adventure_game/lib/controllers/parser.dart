@@ -4,8 +4,8 @@ import 'package:qr_adventure_game/models/parsed_function.dart';
 
 import 'parser_funcs.dart';
 
-const ALPHABET = "aábcčdďeéĕfghiíjklmnňoópqrřsštťuúůvwxyýzžAÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ'„“-.,?!/:{}()|& ";
-
+const ALPHABET =
+    "aábcčdďeéĕfghiíjklmnňoópqrřsštťuúůvwxyýzžAÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ'„“-.,?!/:{}()|& ";
 
 // Config
 const quotes = "'";
@@ -78,22 +78,26 @@ int closingBracesPosition(
   throw Exception("There's no matching closing brace.");
 }
 
+/// If the position is more than text.length, throw exception.
+void assertPosition(int position, String text) {
+  if (position == text.length) {
+    throw Exception("There's no matching closing quote.");
+  }
+}
+
 /// Get the text to the next quotes.
 List getText(String text, int position) {
   String ret = "";
   assert(text[position] == quotes);
   position++;
+  assertPosition(position, text);
   while (text[position] != quotes) {
     if (text[position] == escaper) {
       position++;
     }
-    if (position == text.length) {
-      throw Exception("There's no matching closing quote.");
-    }
+    assertPosition(position, text);
     ret += text[position++];
-    if (position == text.length) {
-      throw Exception("There's no matching closing quote.");
-    }
+    assertPosition(position, text);
   }
   return [ret, position + 1];
 }
@@ -172,22 +176,23 @@ String preprocess(String raw) {
 String decrypt(String encrypted) {
   String decrypted = "";
   for (int i = 0; i < encrypted.length;) {
-    if (i == encrypted.length - 1 || "0".compareTo(encrypted[i]) == 1 ||
+    if (i == encrypted.length - 1 ||
+        "0".compareTo(encrypted[i]) == 1 ||
         "9".compareTo(encrypted[i]) == -1) {
       decrypted += encrypted[i];
       i++;
-    } else if ("0".compareTo(encrypted[i+1]) == 1 ||
-        "9".compareTo(encrypted[i+1]) == -1) {
+    } else if ("0".compareTo(encrypted[i + 1]) == 1 ||
+        "9".compareTo(encrypted[i + 1]) == -1) {
       decrypted += encrypted.substring(i, i + 2);
-      i+=2;
+      i += 2;
     } else if (encrypted.substring(i, i + 2) == "99") {
       if (i != encrypted.length - 2) {
         decrypted += encrypted[i + 2];
       }
-      i+=3;
+      i += 3;
     } else {
       decrypted += ALPHABET[int.parse(encrypted.substring(i, i + 2))];
-      i+=2;
+      i += 2;
     }
   }
   return decrypted;
@@ -200,9 +205,9 @@ List<Widget> parseCode(String code, [bool encryption = false]) {
     code = decrypt(code);
   }
   List<Widget> ret = [];
-  code = preprocess(code);
-  int position = 0;
   try {
+    code = preprocess(code);
+    int position = 0;
     while (position < code.length) {
       if (code[position] == " ") {
         position++;
@@ -228,7 +233,7 @@ List<Widget> parseCode(String code, [bool encryption = false]) {
         throw Exception("Unexpected character ${code[position]}.");
       }
     }
-  } catch (e) {
+  } on Exception catch (e) {
     return [error(e)];
   }
 

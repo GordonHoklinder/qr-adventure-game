@@ -75,6 +75,13 @@ Displays a clickable button.
 + *Text* is displayed on the button.
 + When clicked the button navigates to a new page described by *code*.
 
+### Option
+`&option(password) { code }`
+
+Displays an entry.
+
++ When the user submits the entry with text *password*, navigates to a new page described by *code*.
+
 Encoding
 --------
 The code to the QR codes should be encoded before the QR code is created. It can be done using the `encode.py` script.
@@ -102,4 +109,4 @@ How to use the app
 
 The app was developed by @composerPigeon and @GordonHoklinder. Many thanks to @Keiky and @Yokto13 for their advice and help.
 
-It can be used freely. If one finds it sufficient as it is, the app can be downloaded from Play Store as QR Adventure by publisher Whizzmot at https://play.google.com/store/apps/details?id=com.whizzmot.qr_adventure_game (available in Czech Republic only at this moment) and the only thing left to do is prepare the QR codes. If there are some features missing, feel free to raise an issue or create a pull request. Additionally one can fork the repositary and publish it themself.
+It can be used freely. If one finds it sufficient as it is, the app can be downloaded from Play Store as QR Adventure by publisher Whizzmot at https://play.google.com/store/apps/details?id=com.whizzmot.qr_adventure_game (available in Czech Republic only at this moment) and the only thing left to do is prepare the QR codes. If there are some features missing, feel free to raise an issue or create a pull request. Additionally one can fork the repositary and use this software as described in the LICENSE.txt.
