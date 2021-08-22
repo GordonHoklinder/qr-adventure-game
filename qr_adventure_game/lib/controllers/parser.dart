@@ -5,7 +5,7 @@ import 'package:qr_adventure_game/models/parsed_function.dart';
 import 'parser_funcs.dart';
 
 const ALPHABET =
-    "aábcčdďeéĕfghiíjklmnňoópqrřsštťuúůvwxyýzžAÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ'„“-.,?!/:{}()|& ";
+    "aábcčdďeéěfghiíjklmnňoópqrřsštťuúůvwxyýzžAÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ'„“-.,?!/:{}()|& ";
 
 // Config
 const quotes = "'";
