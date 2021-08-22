@@ -75,8 +75,8 @@ Displays a clickable button.
 + *Text* is displayed on the button.
 + When clicked the button navigates to a new page described by *code*.
 
-### Option
-`&option(password) { code }`
+### Entry
+`&entry(password) { code }`
 
 Displays an entry.
 
