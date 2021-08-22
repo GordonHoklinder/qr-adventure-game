@@ -82,6 +82,31 @@ List<Widget> option(List<String> args) {
   ];
 }
 
+/// Add a entry with button.
+/// If the correct text is provided, navigate to a new page.
+List<Widget> entry(List<String> args) {
+  assert(args.length == 2);
+  return [
+    Container(
+      margin: EdgeInsets.fromLTRB(8, 8, 8, 0),
+      padding: EdgeInsets.all(8),
+      child: TextField(
+        decoration: InputDecoration(
+            labelText: "Zadejte kód a zmáčkněte enter.",
+            border: OutlineInputBorder()),
+        // Should be done via navigation.
+        onSubmitted: (String value) => {
+          if (value == args[0])
+            {
+              Navigator.of(buildContext!).pushReplacement(
+                  AnimatableRoute(builder: (context) => LoadedPage(args[1])))
+            }
+        },
+      ),
+    ),
+  ];
+}
+
 /// If the expression is true, execute the code inside.
 List<Widget> iff(List<String> args) {
   assert(args.length == 2);
@@ -95,6 +120,7 @@ Map funcs = {
   "if": ParsedFunction(2, iff),
   "title": ParsedFunction(2, title),
   "add": ParsedFunction(1, add),
+  "entry": ParsedFunction(2, entry),
   "remove": ParsedFunction(1, remove),
   "option": ParsedFunction(2, option),
 };

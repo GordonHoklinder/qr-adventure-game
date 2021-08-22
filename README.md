@@ -75,6 +75,13 @@ Displays a clickable button.
 + *Text* is displayed on the button.
 + When clicked the button navigates to a new page described by *code*.
 
+### Option
+`&option(password) { code }`
+
+Displays an entry.
+
++ When the user submits the entry with text *password*, navigates to a new page described by *code*.
+
 Encoding
 --------
 The code to the QR codes should be encoded before the QR code is created. It can be done using the `encode.py` script.
