@@ -65,7 +65,7 @@ Removes the item *item* from itinerary
 ### Title
 `&title(text, id)`
 
-Adds a title with text *text* and ads a visited page with id *id* to the itinerary.
+Adds a title with text *text* and adds a visited page with id *id* to the itinerary.
 
 ### Option
 `&option(text) { code }`
