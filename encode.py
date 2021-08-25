@@ -1,6 +1,7 @@
 import re
 import os
 from typing import List
+import qrcode
 
 ALPHABET = r"aábcčdďeéěfghiíjklmnňoópqrřsštťuúůvwxyýzžAÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ'„“-.,?!/:{}()|& "
 quotes = "'"
@@ -11,7 +12,10 @@ underscore = "-"
 
 def encoded(raw: str) -> str:
     """Encode the string."""
-    raw = preprocess(raw)
+    try:
+        raw = preprocess(raw)
+    except ValueError as e:
+        pass
     return "".join(
         [
             (
@@ -186,10 +190,20 @@ for file, filename in files:
         if not "0" <= char <= "9":
             print(f"WARNING: In file {filename}, unencoded character {char}")
 
-# Write qr codes.
+try:
+    os.mkdir(path + "/encoded")
+    os.mkdir(path + "/qrcodes")
+except FileExistsError:
+    pass
+
+# Write encoded files and QR codes.
 for file, filename in files:
-    write_file = open(filename[:-4] + "_encoded.txt", "w")
+    write_file_path = "/encoded/".join(filename.rsplit("/", 1))
+    write_image_path = "/qrcodes/".join(filename.rsplit("/", 1))[:-3] + "png"
+    write_file = open(write_file_path, "w")
     write_file.write(file)
     write_file.close()
-    print(f"SUCCESS: File {filename} encoded.")
+    qr_code = qrcode.make(int(file))
+    qr_code.save(write_image_path)
 
+    print(f"SUCCESS: File {filename} encoded.")
