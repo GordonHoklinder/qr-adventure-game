@@ -200,13 +200,14 @@ String decrypt(String encrypted) {
 
 /// Return the widgets described in the QR code's code.
 List<Widget> parseCode(String code, [bool encryption = false]) {
-  // If encryption is opted on, decode the code.
-  if (encryption) {
-    code = decrypt(code);
-  }
   List<Widget> ret = [];
   try {
-    code = preprocess(code);
+    // If encryption is opted on, decode the code
+    // and do some basic preprocessing.
+    if (encryption) {
+      code = decrypt(code);
+      code = preprocess(code);
+    }
     int position = 0;
     while (position < code.length) {
       if (code[position] == " ") {

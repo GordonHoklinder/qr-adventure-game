@@ -1,5 +1,7 @@
 import 'dart:collection';
 
+import 'package:qr_adventure_game/controllers/preferences.dart';
+
 /// Static class storing all visited pages and grabbed items.
 class Itinerary {
   /// Visited pages.
@@ -21,10 +23,12 @@ class Itinerary {
     } else {
       visited.add(item);
     }
+    saveItemsAsync();
   }
 
   /// Remove [item] from [items].
   static void removeItem(String item) {
     items.remove(item);
+    saveItemsAsync();
   }
 }

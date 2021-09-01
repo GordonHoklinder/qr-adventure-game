@@ -86,11 +86,9 @@ def getFunction(text: str, position: int, filename: str):
         check(code, filename)
     return [name, params, closingBracesPos + 1]
 
-
-def preprocess(raw: str) -> str:
-    """Preprocess the file."""
-    raw = re.sub(r"\s+", " ", raw)
-    raw = re.sub(r"[‘’]", "'", raw)
+def full_preprocess(raw: str) -> str:
+    """Preprocess the file for checker."""
+    raw = preprocess(raw)
     inQuotes = False
     ret = ""
     i = 0
@@ -105,6 +103,13 @@ def preprocess(raw: str) -> str:
             ret += raw[i]
         i+=1
     return ret
+
+
+def preprocess(raw: str) -> str:
+    """Preprocess the file."""
+    raw = re.sub(r"\s+", " ", raw)
+    raw = re.sub(r"[‘’]", "'", raw)
+    return raw
 
 
 items = []
@@ -129,10 +134,11 @@ funcs = {
     "entry" : 2
 }
 
-def check(code: str, name: str):
+def check(code: str, name: str, do_preprocess = False):
     """Check if the code has no errors."""
     try:
-        code = preprocess(code)
+        if do_preprocess:
+            code = full_preprocess(code)
         position = 0
         while position < len(code):
             if code[position] == quotes:
@@ -173,7 +179,7 @@ for file_path in os.listdir(path):
 
 # Check for parsing errors.
 for code, filename in files:
-    check(code, filename)
+    check(code, filename, True)
 
 # Check for unadded items.
 for needer, filename in needed:

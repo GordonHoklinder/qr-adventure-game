@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_adventure_game/controllers/preferences.dart';
 import 'package:qr_adventure_game/routes/route_generator.dart';
 
 import 'controllers/navigator.dart';
@@ -9,6 +10,7 @@ const contrastColor = Colors.white;
 
 void main() {
   runApp(MyApp());
+  loadItemsAsync();
 }
 
 class MyApp extends StatelessWidget {
