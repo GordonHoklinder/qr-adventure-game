@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.whizzmot.qr_adventure_game">
+    <uses-permission android:name="android.permission.CAMERA"/>
    <application
         android:label="QR Adventura"
         android:icon="@mipmap/ic_launcher">
