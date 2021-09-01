@@ -1,6 +1,9 @@
 #THIS IS IMPORTAMT!!!!
 **/key.properties
 
+# Enviroments
+**/venv/**
+
 # Miscellaneous
 *.class
 *.log

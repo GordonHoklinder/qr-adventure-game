@@ -65,7 +65,7 @@ Removes the item *item* from itinerary
 ### Title
 `&title(text, id)`
 
-Adds a title with text *text* and ads a visited page with id *id* to the itinerary.
+Adds a title with text *text* and adds a visited page with id *id* to the itinerary.
 
 ### Option
 `&option(text) { code }`
@@ -75,8 +75,8 @@ Displays a clickable button.
 + *Text* is displayed on the button.
 + When clicked the button navigates to a new page described by *code*.
 
-### Option
-`&option(password) { code }`
+### Entry
+`&entry(password) { code }`
 
 Displays an entry.
 
@@ -84,9 +84,9 @@ Displays an entry.
 
 Encoding
 --------
-The code to the QR codes should be encoded before the QR code is created. It can be done using the `encode.py` script.
+The code to the QR codes should be encoded before the QR code is created. It can be done using the `encode.py` script. One has to install the requirements defined in `requirements.py` (`pip install -r requirements.txt`) and then run the script. The user is asked for a path to a directory with code to qr codes. All files ending with `.txt` are encoded and qr codes are generated. Furthermore, the script checks if the code is written correctly and if there are if clauses which use variables not added anywhere else.
 
-This serves two reasons:
+The encoding itself serves two reasons:
 
 + The final code cannot be read by humans easily. Otherwise the children could just scan the code with other qr code scanner and see even text they shouldn't have access to. Note however that this is not a secure cipher and anyone with a little knowledge in cryptography might be able to hack it.
 + Numbers occupy less space than complicated text in qr codes. Thanks to the encoding it is possible to pass longer codes to the qr code.

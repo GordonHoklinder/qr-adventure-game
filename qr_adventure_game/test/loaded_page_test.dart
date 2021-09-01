@@ -22,22 +22,20 @@ class TestLoadedPageApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoadedPage(
-          r"'Hello qr!'"
+      home: LoadedPage(r"'Hello qr!'"
           r"$option(click_me) {"
           r"  'So close!'"
           r"  $option(again) {"
           r"    'You made it!'"
           r"  }"
-          r"}"
-      ),
+          r"}"),
     );
   }
 }
 
 void main() {
- testWidgets('Test if the options in the LoadedPage load correctly.',
-          (WidgetTester tester) async {
+  testWidgets('Test if the options in the LoadedPage load correctly.',
+      (WidgetTester tester) async {
     await tester.pumpWidget(TestLoadedPageApp());
     expect(find.text('Hello qr!'), findsOneWidget);
     expect(find.text('So close!'), findsNothing);
