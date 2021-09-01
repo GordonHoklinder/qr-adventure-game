@@ -26,8 +26,8 @@ void main() {
     expect(getFunction(r"aaa&func(2,3)bbb", 3)[0], "func");
     expect(getFunction(r"aaa&func(2,3)bbb", 3)[1], ["2", "3"]);
     expect(getFunction(r"aaa&func(2,3)bbb", 3)[2], 13);
-    expect(getFunction(r"aaa&func(2,3){'hello'}bbb", 3)[1],
-        ["2", "3", "'hello'"]);
+    expect(
+        getFunction(r"aaa&func(2,3){'hello'}bbb", 3)[1], ["2", "3", "'hello'"]);
     expect(getFunction(r"aaa&func(2,3){'hello'}bbb", 3)[2], 22);
   });
   test('split splits text correctly', () {
@@ -62,42 +62,40 @@ void main() {
     expect(decrypt("00122115*00122115"), "ahoj*ahoj");
   });
   test('parseCode returns correct number of elements', () {
-    expect(parseCode(
-        r"'Ahoj'&if(false){'ne'}&add(true)&if(true){'jo'}"
-    ).length, 2);
-    expect(parseCode(
-        r"&ThrowException()&ThrowException()"
-    ).length, 1);
-    expect(parseCode(
-      r"'Hello qr!'"
-      r"&add(true)"
-      r"&if(false) {"
-      r"  'This is bad'"
-      r"  'Very bad'"
-      r"}"
-      r"&if(true) {"
-      r"  'Should be seen'"
-      r"}"
-      r"&title(title, title)"
-    ).length, 3);
-    expect(parseCode(
-        r"&add(false)"
-        r"&remove(false)"
-        r"&if(false) {"
-        r"  'This is bad'"
-        r"  'Very bad'"
-        r"}"
-    ).length, 0);
-    expect(parseCode(
-        r"'Hello qr!'"
-        r"&option(click_me) {"
-        r"  &option(again) {"
-        r"    'You made it!'"
-        r"  }"
-        r"}"
-    ).length, 2);
-    expect(parseCode(
-      "8212071717218282120717172182", true
-    ).length, 2);
+    expect(parseCode(r"'Ahoj'&if(false){'ne'}&add(true)&if(true){'jo'}").length,
+        2);
+    expect(parseCode(r"&ThrowException()&ThrowException()").length, 1);
+    expect(
+        parseCode(r"'Hello qr!'"
+                r"&add(true)"
+                r"&if(false) {"
+                r"  'This is bad'"
+                r"  'Very bad'"
+                r"}"
+                r"&if(true) {"
+                r"  'Should be seen'"
+                r"}"
+                r"&title(title, title)")
+            .length,
+        3);
+    expect(
+        parseCode(r"&add(false)"
+                r"&remove(false)"
+                r"&if(false) {"
+                r"  'This is bad'"
+                r"  'Very bad'"
+                r"}")
+            .length,
+        0);
+    expect(
+        parseCode(r"'Hello qr!'"
+                r"&option(click_me) {"
+                r"  &option(again) {"
+                r"    'You made it!'"
+                r"  }"
+                r"}")
+            .length,
+        2);
+    expect(parseCode("8212071717218282120717172182", true).length, 2);
   });
 }
